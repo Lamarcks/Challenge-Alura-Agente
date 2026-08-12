@@ -14,9 +14,12 @@ BASE_DIR = Path(__file__).resolve().parent
 logger = logging.getLogger(__name__)
 
 app = FastAPI(
-    title="Assistente Corporativo Rede Vida+",
-    description="Base de conhecimento conversacional para colaboradores.",
-    version="1.1.0",
+    title="LAMARCKS IA",
+    description=(
+        "Assistente de Inteligência Artificial, Engenharia de Software, Dados e Cloud, "
+        "com acesso à base corporativa da Pegasus quando necessário."
+    ),
+    version="2.0.0",
 )
 app.mount("/static", StaticFiles(directory=BASE_DIR / "static"), name="static")
 
@@ -50,8 +53,8 @@ async def perguntar(dados: PerguntaRequest):
 async def status():
     dados = obter_status()
     dados.update({
-        "status": "online" if dados["groq_configurada"] and dados["base_disponivel"] else "configuracao_pendente",
-        "agente": "Assistente Corporativo Rede Vida+",
+        "status": "online" if dados["groq_configurada"] else "configuracao_pendente",
+        "agente": "LAMARCKS IA",
         "banco_vetorial": "ChromaDB",
         "llm": "Groq",
     })

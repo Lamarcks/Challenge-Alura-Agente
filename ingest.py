@@ -25,6 +25,9 @@ class DocumentoCarregado:
     texto: str
     fonte: str
     area: str
+    categoria: str
+    documento: str
+    tipo: str
     pagina: int | None = None
 
 
@@ -34,18 +37,45 @@ def identificar_area(caminho: Path) -> str:
     return relativo.parts[0].replace("_", " ").title() if len(relativo.parts) > 1 else "Geral"
 
 
+def identificar_categoria(caminho: Path) -> str:
+    """Chave curta da categoria (ex.: backend, frontend, onboarding, arquitetura, incidentes)."""
+    relativo = caminho.relative_to(DOCUMENTS_PATH)
+    return relativo.parts[0].lower() if len(relativo.parts) > 1 else "geral"
+
+
 def carregar_pdf(caminho: Path) -> list[DocumentoCarregado]:
     documentos = []
     for numero, pagina in enumerate(PdfReader(str(caminho)).pages, start=1):
         texto = (pagina.extract_text() or "").strip()
         if texto:
-            documentos.append(DocumentoCarregado(texto, caminho.name, identificar_area(caminho), numero))
+            documentos.append(
+                DocumentoCarregado(
+                    texto,
+                    caminho.name,
+                    identificar_area(caminho),
+                    identificar_categoria(caminho),
+                    caminho.stem,
+                    caminho.suffix.lower().lstrip("."),
+                    numero,
+                )
+            )
     return documentos
 
 
 def carregar_texto(caminho: Path) -> list[DocumentoCarregado]:
     texto = caminho.read_text(encoding="utf-8").strip()
-    return [DocumentoCarregado(texto, caminho.name, identificar_area(caminho))] if texto else []
+    if not texto:
+        return []
+    return [
+        DocumentoCarregado(
+            texto,
+            caminho.name,
+            identificar_area(caminho),
+            identificar_categoria(caminho),
+            caminho.stem,
+            caminho.suffix.lower().lstrip("."),
+        )
+    ]
 
 
 def carregar_csv(caminho: Path) -> list[DocumentoCarregado]:
@@ -54,7 +84,17 @@ def carregar_csv(caminho: Path) -> list[DocumentoCarregado]:
         for linha, dados in enumerate(csv.DictReader(arquivo), start=2):
             texto = "\n".join(f"{campo}: {valor}" for campo, valor in dados.items() if valor)
             if texto:
-                documentos.append(DocumentoCarregado(texto, caminho.name, identificar_area(caminho), linha))
+                documentos.append(
+                    DocumentoCarregado(
+                        texto,
+                        caminho.name,
+                        identificar_area(caminho),
+                        identificar_categoria(caminho),
+                        caminho.stem,
+                        caminho.suffix.lower().lstrip("."),
+                        linha,
+                    )
+                )
     return documentos
 
 
@@ -66,6 +106,9 @@ def carregar_json(caminho: Path) -> list[DocumentoCarregado]:
             json.dumps(item, ensure_ascii=False, indent=2),
             caminho.name,
             identificar_area(caminho),
+            identificar_categoria(caminho),
+            caminho.stem,
+            caminho.suffix.lower().lstrip("."),
             indice,
         )
         for indice, item in enumerate(itens, start=1)
@@ -138,7 +181,14 @@ def criar_banco_vetorial():
     chunks, metadados = [], []
     for documento in documentos:
         for indice, chunk in enumerate(criar_chunks(documento.texto)):
-            metadata = {"fonte": documento.fonte, "area": documento.area, "chunk": indice}
+            metadata = {
+                "fonte": documento.fonte,
+                "area": documento.area,
+                "categoria": documento.categoria,
+                "documento": documento.documento,
+                "tipo": documento.tipo,
+                "chunk": indice,
+            }
             if documento.pagina is not None:
                 metadata["pagina"] = documento.pagina
             chunks.append(chunk)

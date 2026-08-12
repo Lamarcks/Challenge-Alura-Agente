@@ -21,8 +21,15 @@ EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 SUPPORTED_EXTENSIONS = {".pdf", ".md", ".txt", ".csv", ".json"}
 
 # RAG
-CHUNK_SIZE = 850
-CHUNK_OVERLAP = 120
-TOP_K = 4
+CHUNK_SIZE = 900
+CHUNK_OVERLAP = 150
+TOP_K = 5
 MAX_DISTANCE = float(os.getenv("MAX_DISTANCE", "0.45"))
 MAX_QUESTION_LENGTH = 1000
+
+# Geração de resposta (conhecimento geral x conhecimento corporativo)
+GENERAL_TEMPERATURE = 0.4
+GENERAL_MAX_TOKENS = 700
+RAG_TEMPERATURE = 0.15
+RAG_MAX_TOKENS = 550
+CLASSIFIER_MAX_TOKENS = 6

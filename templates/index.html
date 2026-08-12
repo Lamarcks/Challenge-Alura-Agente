@@ -11,10 +11,12 @@
 
     <meta
         name="description"
-        content="Assistente corporativo da Rede Vida+"
+        content="LAMARCKS IA — assistente de inteligência artificial especializado em engenharia de software, dados, arquitetura e cloud, com acesso a bases corporativas autorizadas quando necessário."
     >
 
-    <title>Rede Vida+ | Assistente Corporativo</title>
+    <meta name="theme-color" content="#07111f">
+
+    <title>LAMARCKS IA | Assistente de Inteligência Artificial e Engenharia</title>
 
     <link
         rel="stylesheet"
@@ -24,138 +26,423 @@
 
 <body>
 
-    <main class="chat-container">
+    <!-- Marca reutilizável (nós de rede / circuito abstrato) -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <defs>
+            <symbol id="ai-mark" viewBox="0 0 40 40">
+                <circle cx="12" cy="13" r="3" fill="currentColor"></circle>
+                <circle cx="28" cy="13" r="3" fill="currentColor"></circle>
+                <circle cx="20" cy="29" r="3" fill="currentColor"></circle>
+                <path
+                    d="M12 13L28 13M12 13L20 29M28 13L20 29"
+                    stroke="currentColor"
+                    stroke-width="1.4"
+                    stroke-opacity="0.45"
+                ></path>
+            </symbol>
+        </defs>
+    </svg>
 
-        <header class="chat-header">
-
-            <div class="logo">
-
-                <div class="logo-icon">
-                    ✚
-                </div>
-
-                <div>
-                    <h1>Rede Vida+</h1>
-                    <p>Assistente Corporativo</p>
-                </div>
-
-            </div>
-
-            <div class="status">
-                <span class="status-dot"></span>
-                Online
-            </div>
-
-        </header>
-
-        <section
-            class="chat-content"
-            id="chat"
-            aria-live="polite"
-        >
-
-            <div class="welcome">
-
-                <div class="bot-avatar">
-                    ✚
-                </div>
-
-                <h2>Olá! Como posso ajudar?</h2>
-
-                <p>
-                    Sou o assistente corporativo da Rede Vida+.
-                    Posso ajudar com políticas, procedimentos e
-                    informações disponíveis nos documentos internos.
-                </p>
-
-                <div class="suggestions">
-
-                    <button
-                        type="button"
-                        onclick="usarSugestao(
-                            'Como funciona o reembolso de despesas?'
-                        )"
-                    >
-                        💳 Reembolso de despesas
-                    </button>
-
-                    <button
-                        type="button"
-                        onclick="usarSugestao(
-                            'Quais são os benefícios oferecidos aos colaboradores?'
-                        )"
-                    >
-                        👥 Benefícios
-                    </button>
-
-                    <button
-                        type="button"
-                        onclick="usarSugestao(
-                            'Como devo proceder para remarcar uma consulta?'
-                        )"
-                    >
-                        📅 Procedimento de atendimento
-                    </button>
-
-                    <button
-                        type="button"
-                        onclick="usarSugestao(
-                            'Quais são as orientações de privacidade de dados?'
-                        )"
-                    >
-                        🔒 Privacidade de dados
-                    </button>
-
-                </div>
-
-            </div>
-
-        </section>
+    <div class="app-shell">
 
         <div
-            class="typing"
-            id="typing"
-            role="status"
+            class="sidebar-backdrop"
+            id="sidebar-backdrop"
+        ></div>
+
+        <aside
+            class="sidebar"
+            id="sidebar"
         >
-            <span></span>
-            <span></span>
-            <span></span>
 
-            Assistente digitando...
-        </div>
+            <div class="sidebar-header">
 
-        <footer class="chat-footer">
+                <div class="brand">
 
-            <form id="chat-form">
+                    <div class="brand-icon" aria-hidden="true">
+                        <svg width="22" height="22"><use href="#ai-mark"></use></svg>
+                    </div>
 
-                <input
-                    type="text"
-                    id="pergunta"
-                    placeholder="Digite uma pergunta sobre a empresa..."
-                    autocomplete="off"
-                    maxlength="500"
-                    aria-label="Digite sua pergunta"
-                    required
-                >
+                    <div class="brand-text">
+                        <h1>LAMARCKS IA</h1>
+                        <p>Assistente de Inteligência Artificial e Engenharia</p>
+                    </div>
+
+                </div>
 
                 <button
-                    type="submit"
-                    id="send-button"
-                    aria-label="Enviar pergunta"
+                    type="button"
+                    class="sidebar-close"
+                    id="sidebar-close"
+                    aria-label="Fechar menu"
                 >
-                    ➤
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 5l14 14M19 5 5 19"/></svg>
                 </button>
 
-            </form>
+            </div>
 
-            <p class="footer-info">
-                As respostas são geradas com IA a partir do
-                documentos internos da Rede Vida+.
-            </p>
+            <div class="brand-powered">
+                <span class="brand-powered-dot" aria-hidden="true"></span>
+                Powered by <strong>Pegasus&nbsp;Soluções</strong>
+            </div>
 
-        </footer>
+            <nav
+                class="sidebar-nav"
+                aria-label="Áreas do LAMARCKS IA"
+            >
 
-    </main>
+                <p class="nav-label">Áreas</p>
+
+                <button
+                    type="button"
+                    class="nav-item active"
+                    id="nav-overview"
+                    onclick="selecionarArea(this, 'overview')"
+                >
+                    <span class="nav-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="7" height="7" rx="1.2"/><rect x="14" y="3" width="7" height="7" rx="1.2"/><rect x="3" y="14" width="7" height="7" rx="1.2"/><rect x="14" y="14" width="7" height="7" rx="1.2"/>
+                        </svg>
+                    </span>
+                    Visão Geral
+                </button>
+
+                <button
+                    type="button"
+                    class="nav-item"
+                    onclick="selecionarArea(this, 'Como funciona um sistema RAG?')"
+                >
+                    <span class="nav-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="6" cy="12" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="18" cy="18" r="2.4"/><path d="M8.2 10.8 15.8 7.2M8.2 13.2 15.8 16.8"/>
+                        </svg>
+                    </span>
+                    Inteligência Artificial
+                </button>
+
+                <button
+                    type="button"
+                    class="nav-item"
+                    onclick="selecionarArea(this, 'Qual a diferença entre API REST e GraphQL?')"
+                >
+                    <span class="nav-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="7" rx="1.5"/><rect x="3" y="13" width="18" height="7" rx="1.5"/><circle cx="7.2" cy="7.5" r="0.6" fill="currentColor" stroke="none"/><circle cx="7.2" cy="16.5" r="0.6" fill="currentColor" stroke="none"/>
+                        </svg>
+                    </span>
+                    Engenharia de Software
+                </button>
+
+                <button
+                    type="button"
+                    class="nav-item"
+                    onclick="selecionarArea(this, 'O que faz um engenheiro de dados?')"
+                >
+                    <span class="nav-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.66 3.13 3 7 3s7-1.34 7-3V6"/><path d="M5 12v6c0 1.66 3.13 3 7 3s7-1.34 7-3v-6"/>
+                        </svg>
+                    </span>
+                    Engenharia de Dados
+                </button>
+
+                <button
+                    type="button"
+                    class="nav-item"
+                    onclick="selecionarArea(this, 'Explique arquitetura de microsserviços.')"
+                >
+                    <span class="nav-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M7 18h10a4 4 0 0 0 .4-7.98A5.5 5.5 0 0 0 7.1 9.1 4 4 0 0 0 7 18Z"/>
+                        </svg>
+                    </span>
+                    Arquitetura &amp; Cloud
+                </button>
+
+                <button
+                    type="button"
+                    class="nav-item"
+                    onclick="selecionarArea(this, 'Quais processos internos da Pegasus estão documentados na base corporativa?')"
+                >
+                    <span class="nav-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="7" width="18" height="12" rx="1.5"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 12h18"/>
+                        </svg>
+                    </span>
+                    Base Corporativa
+                </button>
+
+            </nav>
+
+            <div class="sidebar-footer">
+
+                <a
+                    class="footer-link"
+                    href="https://github.com/Lamarcks"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="currentColor">
+                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+                            0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+                            -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66
+                            .07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+                            -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0
+                            1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82
+                            1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01
+                            1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                    </svg>
+                    GitHub
+                </a>
+
+                <a
+                    class="footer-link"
+                    href="https://www.linkedin.com/in/ihago-lamarcks1/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="currentColor">
+                        <path d="M14.82 0H1.18C.53 0 0 .52 0 1.17v13.66C0 15.48.53 16 1.18 16h13.64
+                            c.65 0 1.18-.52 1.18-1.17V1.17C16 .52 15.47 0 14.82 0zM4.75 13.6H2.38
+                            V6.14h2.37zM3.56 5.1a1.37 1.37 0 1 1 0-2.74 1.37 1.37 0 0 1 0 2.74z
+                            M13.6 13.6h-2.36V9.97c0-.87-.02-1.98-1.21-1.98-1.21 0-1.4.94-1.4 1.92v3.69H6.28
+                            V6.14h2.27v1.02h.03c.32-.6 1.09-1.22 2.24-1.22 2.4 0 2.84 1.58 2.84 3.63z"/>
+                    </svg>
+                    LinkedIn
+                </a>
+
+            </div>
+
+        </aside>
+
+        <main class="chat-container">
+
+            <header class="chat-header">
+
+                <button
+                    type="button"
+                    class="menu-toggle"
+                    id="menu-toggle"
+                    aria-label="Abrir menu"
+                    aria-expanded="false"
+                    aria-controls="sidebar"
+                >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+
+                <div class="header-title">
+                    <h2>LAMARCKS IA</h2>
+                    <span class="header-subtitle">Assistente de Inteligência Artificial e Engenharia</span>
+                </div>
+
+                <div class="header-actions">
+
+                    <div class="status">
+                        <span class="status-dot"></span>
+                        Online
+                    </div>
+
+                    <div class="help-wrapper">
+                        <button
+                            type="button"
+                            class="icon-button"
+                            id="help-button"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                            aria-controls="help-panel"
+                            aria-label="Ajuda"
+                        >
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 4.8 1c0 1.7-2.3 1.9-2.3 3.3"/><circle cx="12" cy="17" r="0.6" fill="currentColor" stroke="none"/>
+                            </svg>
+                        </button>
+
+                        <div
+                            class="help-panel"
+                            id="help-panel"
+                            role="dialog"
+                            aria-label="Ajuda rápida"
+                            hidden
+                        >
+                            <p class="help-title">Como usar o LAMARCKS IA</p>
+                            <p>Digite sua pergunta em linguagem natural ou selecione uma área na barra lateral.</p>
+                            <p>O LAMARCKS IA responde com conhecimento geral de tecnologia e, quando necessário, consulta a base corporativa autorizada da Pegasus.</p>
+                        </div>
+                    </div>
+
+                    <button
+                        type="button"
+                        class="icon-button"
+                        id="clear-button"
+                        aria-label="Limpar conversa"
+                        title="Limpar conversa"
+                    >
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/>
+                        </svg>
+                    </button>
+
+                    <div class="agent-avatar" aria-hidden="true">
+                        <svg width="16" height="16"><use href="#ai-mark"></use></svg>
+                    </div>
+
+                </div>
+
+            </header>
+
+            <section
+                class="chat-content"
+                id="chat"
+                aria-live="polite"
+            >
+
+                <div class="welcome" id="welcome">
+
+                    <div class="welcome-badge">
+                        <span class="welcome-badge-dot" aria-hidden="true"></span>
+                        LAMARCKS INTELLIGENCE PLATFORM
+                    </div>
+
+                    <div class="bot-avatar" aria-hidden="true">
+                        <svg width="34" height="34"><use href="#ai-mark"></use></svg>
+                    </div>
+
+                    <h2>Inteligência para engenharia, dados e tecnologia.</h2>
+
+                    <p class="welcome-lead">
+                        Converse com um assistente especializado em inteligência artificial,
+                        desenvolvimento de software, dados, arquitetura e cloud.
+                    </p>
+
+                    <p class="welcome-note">
+                        Quando necessário, o LAMARCKS IA também consulta bases corporativas
+                        autorizadas para fornecer respostas contextualizadas.
+                    </p>
+
+                    <div class="query-cards">
+
+                        <button
+                            type="button"
+                            class="query-card"
+                            onclick="usarSugestao(
+                                'Como funciona um sistema RAG?'
+                            )"
+                        >
+                            <span class="query-card-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="6" cy="12" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="18" cy="18" r="2.4"/><path d="M8.2 10.8 15.8 7.2M8.2 13.2 15.8 16.8"/>
+                                </svg>
+                            </span>
+                            <span class="query-card-title">Inteligência Artificial</span>
+                            <span class="query-card-desc">IA generativa, RAG, modelos de linguagem e machine learning.</span>
+                        </button>
+
+                        <button
+                            type="button"
+                            class="query-card"
+                            onclick="usarSugestao(
+                                'Qual a diferença entre API REST e GraphQL?'
+                            )"
+                        >
+                            <span class="query-card-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="4" width="18" height="7" rx="1.5"/><rect x="3" y="13" width="18" height="7" rx="1.5"/><circle cx="7.2" cy="7.5" r="0.6" fill="currentColor" stroke="none"/><circle cx="7.2" cy="16.5" r="0.6" fill="currentColor" stroke="none"/>
+                                </svg>
+                            </span>
+                            <span class="query-card-title">Engenharia de Software</span>
+                            <span class="query-card-desc">Back-end, front-end, APIs e boas práticas.</span>
+                        </button>
+
+                        <button
+                            type="button"
+                            class="query-card"
+                            onclick="usarSugestao(
+                                'O que faz um engenheiro de dados?'
+                            )"
+                        >
+                            <span class="query-card-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.66 3.13 3 7 3s7-1.34 7-3V6"/><path d="M5 12v6c0 1.66 3.13 3 7 3s7-1.34 7-3v-6"/>
+                                </svg>
+                            </span>
+                            <span class="query-card-title">Engenharia de Dados</span>
+                            <span class="query-card-desc">Pipelines, bancos de dados, ETL e processamento.</span>
+                        </button>
+
+                        <button
+                            type="button"
+                            class="query-card"
+                            onclick="usarSugestao(
+                                'Explique arquitetura de microsserviços.'
+                            )"
+                        >
+                            <span class="query-card-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M7 18h10a4 4 0 0 0 .4-7.98A5.5 5.5 0 0 0 7.1 9.1 4 4 0 0 0 7 18Z"/>
+                                </svg>
+                            </span>
+                            <span class="query-card-title">Arquitetura &amp; Cloud</span>
+                            <span class="query-card-desc">Microsserviços, Docker, DevOps, OCI e infraestrutura.</span>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <div
+                class="typing"
+                id="typing"
+                role="status"
+            >
+                <span class="typing-avatar" aria-hidden="true">
+                    <svg width="14" height="14"><use href="#ai-mark"></use></svg>
+                </span>
+
+                <span class="typing-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+
+                <span class="typing-text">LAMARCKS IA está pensando...</span>
+            </div>
+
+            <footer class="chat-footer">
+
+                <form id="chat-form">
+
+                    <input
+                        type="text"
+                        id="pergunta"
+                        placeholder="Pergunte sobre IA, engenharia, dados, cloud ou processos da Pegasus..."
+                        autocomplete="off"
+                        maxlength="500"
+                        aria-label="Digite sua pergunta"
+                        required
+                    >
+
+                    <button
+                        type="submit"
+                        id="send-button"
+                        aria-label="Enviar pergunta"
+                    >
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M13 5l7 7-7 7"/></svg>
+                    </button>
+
+                </form>
+
+                <p class="footer-info">
+                    Respostas geradas por IA, com apoio de bases corporativas
+                    autorizadas quando necessário.
+                </p>
+
+            </footer>
+
+        </main>
+
+    </div>
 
     <script src="/static/script.js"></script>
 
