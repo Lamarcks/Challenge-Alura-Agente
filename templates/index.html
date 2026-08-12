@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Assistente corporativo da Rede Vida+"
+    >
+
+    <title>Rede Vida+ | Assistente Corporativo</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/style.css"
+    >
+</head>
+
+<body>
+
+    <main class="chat-container">
+
+        <header class="chat-header">
+
+            <div class="logo">
+
+                <div class="logo-icon">
+                    ✚
+                </div>
+
+                <div>
+                    <h1>Rede Vida+</h1>
+                    <p>Assistente Corporativo</p>
+                </div>
+
+            </div>
+
+            <div class="status">
+                <span class="status-dot"></span>
+                Online
+            </div>
+
+        </header>
+
+        <section
+            class="chat-content"
+            id="chat"
+            aria-live="polite"
+        >
+
+            <div class="welcome">
+
+                <div class="bot-avatar">
+                    ✚
+                </div>
+
+                <h2>Olá! Como posso ajudar?</h2>
+
+                <p>
+                    Sou o assistente corporativo da Rede Vida+.
+                    Posso ajudar com políticas, procedimentos e
+                    informações disponíveis nos documentos internos.
+                </p>
+
+                <div class="suggestions">
+
+                    <button
+                        type="button"
+                        onclick="usarSugestao(
+                            'Como funciona o reembolso de despesas?'
+                        )"
+                    >
+                        💳 Reembolso de despesas
+                    </button>
+
+                    <button
+                        type="button"
+                        onclick="usarSugestao(
+                            'Quais são os benefícios oferecidos aos colaboradores?'
+                        )"
+                    >
+                        👥 Benefícios
+                    </button>
+
+                    <button
+                        type="button"
+                        onclick="usarSugestao(
+                            'Como devo proceder para remarcar uma consulta?'
+                        )"
+                    >
+                        📅 Procedimento de atendimento
+                    </button>
+
+                    <button
+                        type="button"
+                        onclick="usarSugestao(
+                            'Quais são as orientações de privacidade de dados?'
+                        )"
+                    >
+                        🔒 Privacidade de dados
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <div
+            class="typing"
+            id="typing"
+            role="status"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+
+            Assistente digitando...
+        </div>
+
+        <footer class="chat-footer">
+
+            <form id="chat-form">
+
+                <input
+                    type="text"
+                    id="pergunta"
+                    placeholder="Digite uma pergunta sobre a empresa..."
+                    autocomplete="off"
+                    maxlength="500"
+                    aria-label="Digite sua pergunta"
+                    required
+                >
+
+                <button
+                    type="submit"
+                    id="send-button"
+                    aria-label="Enviar pergunta"
+                >
+                    ➤
+                </button>
+
+            </form>
+
+            <p class="footer-info">
+                As respostas são geradas com IA a partir do
+                documentos internos da Rede Vida+.
+            </p>
+
+        </footer>
+
+    </main>
+
+    <script src="/static/script.js"></script>
+
+</body>
+
+</html>
