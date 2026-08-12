@@ -336,34 +336,6 @@ Quais padrões de engenharia back-end são adotados pela Pegasus?
 
 ---
 
-## Status do projeto
-
-✅ Interface web funcional
-✅ Integração com Groq
-✅ RAG com ChromaDB
-✅ Base corporativa organizada por categoria
-✅ Roteamento entre conhecimento geral e RAG
-✅ Fallback para perguntas sem contexto suficiente
-✅ Proteção contra exposição dos documentos internos
-✅ Interface responsiva
-✅ Identidade visual corporativa do LAMARCKS IA
-✅ Respostas gerais sobre IA, engenharia, dados e cloud
-
----
-
-## Melhorias futuras
-
-* Deploy na Oracle Cloud Infrastructure;
-* autenticação de usuários;
-* painel administrativo;
-* métricas de utilização;
-* histórico persistente de conversas;
-* controle de acesso à base corporativa;
-* novas fontes de conhecimento;
-* observabilidade e monitoramento da aplicação.
-
----
-
 ## Autor
 
 **Ihago**
