@@ -1,98 +1,383 @@
-# Assistente Corporativo — Rede Vida+
+# LAMARCKS IA
 
-Aplicação de inteligência artificial generativa que transforma documentos internos da Rede Vida+ em uma base de conhecimento conversacional para colaboradores. A solução usa RAG (*Retrieval-Augmented Generation*): antes de responder, recupera os trechos mais relevantes dos documentos indexados e gera uma resposta fundamentada exclusivamente neles.
+Assistente inteligente de **Inteligência Artificial, Engenharia de Software, Dados e Cloud**, desenvolvido para o Desafio Final da Alura.
 
-> O projeto é um MVP educacional. As respostas são informativas e não substituem os canais oficiais da organização.
+O **LAMARCKS IA** combina conhecimento geral de tecnologia com uma base corporativa privada da **Pegasus**, utilizando arquitetura RAG para responder perguntas contextualizadas sem expor documentos internos.
 
-## Funcionalidades
+> O LAMARCKS IA não funciona apenas como um chatbot baseado em documentos. Ele identifica quando uma pergunta pode ser respondida com conhecimento geral e quando precisa consultar a base corporativa privada da Pegasus.
 
-- Perguntas em linguagem natural por uma interface web aberta, sem autenticação individual.
-- Busca semântica nos documentos internos com ChromaDB.
-- Respostas geradas pela Groq com modelo Llama.
-- Respostas com referência ao arquivo, à área e à página/linha de origem quando disponível.
-- Recusa segura quando não há evidência suficiente nos documentos.
-- Ingestão inicial de **PDF, Markdown, TXT, CSV e JSON**. A arquitetura de carregadores permite incluir Word, Excel, PowerPoint e HTML posteriormente.
+---
+
+## Sobre a Pegasus
+
+A **Pegasus** é uma empresa de tecnologia especializada no desenvolvimento de software escalável sob arquitetura de microsserviços e soluções de Inteligência Artificial (RAG).
+
+Destaca-se por seus rigorosos padrões técnicos em engenharia back-end e front-end, garantindo excelência operacional e segurança em infraestruturas de nuvem, incluindo **Oracle Cloud Infrastructure (OCI)**.
+
+---
+
+## O que o LAMARCKS IA faz
+
+* 🧠 **Assistente de IA:** responde dúvidas gerais sobre Inteligência Artificial, Machine Learning, IA Generativa, RAG e modelos de linguagem.
+* 💻 **Engenharia de Software:** responde questões sobre back-end, front-end, APIs, arquitetura e boas práticas de desenvolvimento.
+* 📊 **Engenharia de Dados:** auxilia com conceitos de ETL, pipelines, bancos de dados, processamento e arquitetura de dados.
+* ☁️ **Cloud e DevOps:** responde perguntas sobre Docker, microsserviços, infraestrutura, OCI e conceitos relacionados.
+* 📚 **RAG Corporativo:** consulta uma base privada de documentos da Pegasus para responder perguntas específicas sobre padrões e processos internos.
+* 🔀 **Roteamento Inteligente:** identifica automaticamente se a pergunta deve utilizar conhecimento geral ou a base RAG.
+* 🛡️ **Proteção da Base Interna:** utiliza os documentos como contexto, sem disponibilizar PDFs completos, caminhos internos ou conteúdo bruto.
+* 📄 **Referência de Fonte:** quando a resposta utiliza RAG, informa de forma simplificada qual base corporativa foi consultada.
+* 💡 **Sugestões de Perguntas:** disponibiliza exemplos de perguntas para facilitar a utilização do sistema.
+* 📱 **Interface Responsiva:** desenvolvida para funcionar em computadores, tablets e dispositivos móveis.
+
+---
+
+## Funcionamento híbrido
+
+O LAMARCKS IA trabalha com duas formas principais de resposta.
+
+### Conhecimento Geral
+
+Perguntas como:
+
+```text
+O que é RAG?
+```
+
+```text
+Como funciona uma API REST?
+```
+
+```text
+O que faz um engenheiro de dados?
+```
+
+```text
+Quais são as vantagens de microsserviços?
+```
+
+são respondidas utilizando o conhecimento geral do modelo de linguagem.
+
+### Base Corporativa
+
+Perguntas como:
+
+```text
+Como funciona o onboarding da Pegasus?
+```
+
+```text
+Quais padrões de back-end são utilizados pela Pegasus?
+```
+
+```text
+Como a Pegasus organiza sua arquitetura de microsserviços?
+```
+
+fazem o sistema consultar a base vetorial utilizando RAG.
+
+---
 
 ## Arquitetura
 
 ```text
-Colaborador → Interface web (HTML/CSS/JS) → FastAPI
-                                              ↓
-                                 Recuperação semântica (ChromaDB)
-                                              ↓
-                              Trechos dos documentos + pergunta → Groq LLM
-                                              ↓
-                             Resposta fundamentada + fontes exibidas no chat
+                         Usuário
+                            │
+                            ▼
+                     Interface Web
+                            │
+                            ▼
+                       FastAPI
+                            │
+                            ▼
+                  Roteador de Perguntas
+                    │               │
+                    │               │
+              Pergunta Geral    Pergunta Corporativa
+                    │               │
+                    ▼               ▼
+                 Groq LLM        ChromaDB
+                    │               │
+                    │         Busca Semântica
+                    │               │
+                    │               ▼
+                    │        Contexto Recuperado
+                    │               │
+                    └───────┬───────┘
+                            ▼
+                         Groq LLM
+                            │
+                            ▼
+                         Resposta
 ```
 
-Os documentos devem ser colocados em `documentos/`. Para identificar a área, use subpastas, por exemplo: `documentos/recursos_humanos/`, `documentos/operacional/`, `documentos/compliance/` e `documentos/financeiro/`. O repositório inclui documentos Markdown fictícios nessas quatro áreas para permitir a demonstração imediata do MVP; substitua-os apenas por documentos autorizados antes de um uso real.
+---
 
-## Tecnologias
+## Base de conhecimento corporativa
 
-- Python e FastAPI
-- ChromaDB (banco vetorial local)
-- Sentence Transformers (`all-MiniLM-L6-v2`) para embeddings
-- Groq API + Llama 3.1 para geração de respostas
-- HTML, CSS e JavaScript
-- Docker para empacotamento e Oracle Cloud Infrastructure (OCI) para deploy
+A base RAG está organizada em diferentes áreas:
+
+```text
+documentos/
+├── arquitetura/
+├── backend/
+├── frontend/
+├── incidentes/
+└── onboarding/
+```
+
+Esses documentos são utilizados internamente pelo sistema para geração de contexto.
+
+A aplicação não disponibiliza os arquivos diretamente ao usuário.
+
+---
+
+## Segurança da informação
+
+O projeto foi desenvolvido considerando que a documentação corporativa pode conter informações privadas.
+
+Por isso, o LAMARCKS IA:
+
+* não fornece documentos completos;
+* não disponibiliza links diretos para os PDFs internos;
+* não revela caminhos de arquivos;
+* não apresenta chunks ou embeddings;
+* não expõe o conteúdo bruto do ChromaDB;
+* não inventa informações corporativas quando a base não possui a resposta.
+
+Quando uma informação interna não é encontrada, o sistema pode fornecer uma explicação geral sobre o assunto, deixando claro que aquela informação não foi localizada na base corporativa.
+
+---
+
+## Tecnologias utilizadas
+
+| Camada                   | Tecnologia                     |
+| ------------------------ | ------------------------------ |
+| Front-end                | HTML, CSS e JavaScript         |
+| Backend                  | Python                         |
+| API                      | FastAPI                        |
+| Servidor                 | Uvicorn                        |
+| LLM                      | Groq API                       |
+| RAG                      | Retrieval-Augmented Generation |
+| Banco Vetorial           | ChromaDB                       |
+| Embeddings               | Sentence Transformers          |
+| Documentos               | PDF                            |
+| Configuração             | python-dotenv                  |
+| Infraestrutura planejada | Oracle Cloud Infrastructure    |
+
+---
+
+## Estrutura do projeto
+
+```text
+ALURA-AGENTE-IA/
+│
+├── TECNOLOGIA IA/
+│   │
+│   ├── chroma_db/
+│   │
+│   ├── documentos/
+│   │   ├── arquitetura/
+│   │   ├── backend/
+│   │   ├── frontend/
+│   │   ├── incidentes/
+│   │   └── onboarding/
+│   │
+│   ├── static/
+│   │   ├── style.css
+│   │   └── script.js
+│   │
+│   ├── templates/
+│   │   └── index.html
+│   │
+│   ├── .env
+│   ├── .env.example
+│   ├── .gitignore
+│   ├── app.py
+│   ├── config.py
+│   ├── ingest.py
+│   ├── rag.py
+│   ├── requirements.txt
+│   └── README.md
+│
+└── .venv/
+```
+
+---
 
 ## Como executar localmente
 
-Pré-requisitos: Python 3.11 ou 3.12, uma chave da [Groq](https://console.groq.com/keys) e `pip`.
+Clone o repositório:
 
 ```bash
-git clone <URL_DO_SEU_REPOSITORIO>
-cd ALURA-AGENTE-CLINICA
+git clone URL_DO_SEU_REPOSITORIO
+```
+
+Entre na pasta:
+
+```bash
+cd ALURA-AGENTE-IA
+```
+
+Crie o ambiente virtual:
+
+```bash
 python -m venv .venv
 ```
 
-Ative o ambiente virtual, instale as dependências e configure a chave:
+No Windows:
 
-```bash
-pip install -r requirements.txt
-copy .env.example .env
+```powershell
+.venv\Scripts\Activate
 ```
 
-Edite `.env` e preencha `GROQ_API_KEY`. Depois, adicione documentos em `documentos/` e execute a indexação:
+Entre na aplicação:
 
-```bash
+```powershell
+cd "TECNOLOGIA IA"
+```
+
+Instale as dependências:
+
+```powershell
+python -m pip install -r requirements.txt
+```
+
+Crie o arquivo `.env` a partir do exemplo:
+
+```text
+.env.example
+```
+
+e informe sua chave da API Groq.
+
+---
+
+## Indexando os documentos
+
+Para criar ou atualizar a base vetorial:
+
+```powershell
 python ingest.py
-uvicorn app:app --reload
 ```
 
-Abra `http://127.0.0.1:8000`. O status técnico pode ser consultado em `http://127.0.0.1:8000/api/status`.
+Esse processo:
 
-## Perguntas de exemplo
+1. lê os documentos;
+2. divide o conteúdo em trechos;
+3. gera embeddings;
+4. adiciona metadados;
+5. armazena os vetores no ChromaDB.
 
-As perguntas devem refletir o conteúdo dos documentos adicionados. Exemplos:
+---
 
-- “Como funciona o reembolso de despesas?”
-- “Quais benefícios são oferecidos aos colaboradores?”
-- “Qual é o procedimento para remarcar uma consulta?”
-- “Quais orientações de privacidade de dados devo seguir?”
+## Iniciando a aplicação
 
-Quando o assunto não estiver nos documentos, o agente informa que não encontrou evidência suficiente, em vez de inventar uma resposta.
+Execute:
 
-## Deploy na Oracle Cloud Infrastructure
-
-O deploy previsto utiliza uma **instância OCI Compute** (serviço Oracle) com Docker. Antes do deploy, substitua os documentos de exemplo pelos documentos corporativos permitidos para demonstração e execute `python ingest.py` para gerar a base local.
-
-```bash
-docker build -t rede-vida-assistente .
-docker run -d --name rede-vida-assistente -p 8000:8000 --env-file .env rede-vida-assistente
+```powershell
+python -m uvicorn app:app --reload
 ```
 
-Na instância OCI, libere a porta 8000 na regra de entrada da VCN e no firewall da máquina. A demonstração ficará disponível em `http://<IP_PUBLICO_DA_INSTANCIA>:8000`.
+Ou utilizando outra porta:
 
-Para a entrega final, inclua abaixo o link público e uma captura de tela ou vídeo da aplicação implantada:
+```powershell
+python -m uvicorn app:app --reload --port 8020
+```
 
-- Demonstração: `ADICIONAR_URL_DO_DEPLOY`
-- Evidência visual: adicionar imagem ou vídeo na pasta `docs/` e referenciá-lo aqui.
+Abra no navegador:
 
-## Próximas evoluções
+```text
+http://127.0.0.1:8000
+```
 
-- Suporte a Word, Excel, PowerPoint e HTML.
-- OCR para PDFs digitalizados ou sem camada de texto.
-- Integração com OCI Object Storage para armazenar os documentos.
-- Painel de reindexação e métricas de uso.
-- Testes automatizados e avaliação de qualidade das respostas.
+ou:
+
+```text
+http://127.0.0.1:8020
+```
+
+---
+
+## Exemplos de perguntas
+
+### Inteligência Artificial
+
+```text
+Como funciona um sistema RAG?
+```
+
+### Engenharia de Software
+
+```text
+Qual a diferença entre uma API REST e GraphQL?
+```
+
+### Engenharia de Dados
+
+```text
+O que faz um engenheiro de dados?
+```
+
+### Arquitetura
+
+```text
+Quais são as vantagens e desvantagens de microsserviços?
+```
+
+### Base Corporativa
+
+```text
+Como funciona o onboarding de desenvolvedores da Pegasus?
+```
+
+```text
+Quais padrões de engenharia back-end são adotados pela Pegasus?
+```
+
+---
+
+## Status do projeto
+
+✅ Interface web funcional
+✅ Integração com Groq
+✅ RAG com ChromaDB
+✅ Base corporativa organizada por categoria
+✅ Roteamento entre conhecimento geral e RAG
+✅ Fallback para perguntas sem contexto suficiente
+✅ Proteção contra exposição dos documentos internos
+✅ Interface responsiva
+✅ Identidade visual corporativa do LAMARCKS IA
+✅ Respostas gerais sobre IA, engenharia, dados e cloud
+
+---
+
+## Melhorias futuras
+
+* Deploy na Oracle Cloud Infrastructure;
+* autenticação de usuários;
+* painel administrativo;
+* métricas de utilização;
+* histórico persistente de conversas;
+* controle de acesso à base corporativa;
+* novas fontes de conhecimento;
+* observabilidade e monitoramento da aplicação.
+
+---
+
+## Autor
+
+**Ihago**
+
+Projeto desenvolvido como parte do desafio de **Inteligência Artificial e RAG da Alura / Oracle Next Education**.
+
+Áreas trabalhadas no projeto:
+
+* Inteligência Artificial;
+* Engenharia de Prompt;
+* RAG;
+* Python;
+* FastAPI;
+* Engenharia de Software;
+* ChromaDB;
+* APIs de LLM;
+* Cloud Computing.
