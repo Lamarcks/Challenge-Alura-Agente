@@ -16,6 +16,16 @@ Destaca-se por seus rigorosos padrões técnicos em engenharia back-end e front-
 
 ---
 
+🌐 Aplicação Online
+
+A aplicação está hospedada na Oracle Cloud Infrastructure (OCI) e pode ser testada diretamente pelo navegador:
+
+http://163.176.27.55:8000
+
+Não é necessário instalar nada para testar a versão online.
+
+---
+
 ## O que o LAMARCKS IA faz
 
 * 🧠 **Assistente de IA:** responde dúvidas gerais sobre Inteligência Artificial, Machine Learning, IA Generativa, RAG e modelos de linguagem.
