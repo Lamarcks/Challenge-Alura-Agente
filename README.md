@@ -660,8 +660,6 @@ O projeto integra conhecimentos de **IA, desenvolvimento de software, RAG, APIs,
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Ihago_Lamarcks-0A66C2?style=for-the-badge\&logo=linkedin\&logoColor=white)](https://www.linkedin.com/in/ihago-lamarcks1/)
 
-[![GitHub](https://img.shields.io/badge/GitHub-Lamarcks-181717?style=for-the-badge\&logo=github\&logoColor=white)](https://github.com/Lamarcks)
-
 </p>
 
 ---
