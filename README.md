@@ -15,7 +15,7 @@ Projeto desenvolvido para o desafio final da **Alura + Oracle Next Education (ON
 ![Groq](https://img.shields.io/badge/Groq-LLM-F55036?style=for-the-badge)
 ![ChromaDB](https://img.shields.io/badge/ChromaDB-Vector_DB-orange?style=for-the-badge)
 ![RAG](https://img.shields.io/badge/RAG-Generative_AI-blueviolet?style=for-the-badge)
-![OCI](https://img.shields.io/badge/Oracle_Cloud-OCI-F80000?style=for-the-badge\&logo=oracle\&logoColor=white)
+![OCI](https://img.shields.io/badge/Oracle_Cloud-OCI-F80000?style=for-the-badge\&logo=oracle\&logoColor=white) 
 
 ![Status](https://img.shields.io/badge/STATUS-ONLINE-success?style=for-the-badge)
 ![Challenge](https://img.shields.io/badge/ALURA-ONE-blue?style=for-the-badge)
