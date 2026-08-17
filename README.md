@@ -655,7 +655,7 @@ Possíveis evoluções futuras do projeto:
 Projeto desenvolvido como parte do desafio de **Inteligência Artificial e RAG da Alura + Oracle Next Education**.
 
 O projeto integra conhecimentos de **IA, desenvolvimento de software, RAG, APIs, bancos vetoriais e computação em nuvem** em uma aplicação funcional e publicada na Oracle Cloud.
-
+ 
 <p align="left">
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Ihago_Lamarcks-0A66C2?style=for-the-badge\&logo=linkedin\&logoColor=white)](https://www.linkedin.com/in/ihago-lamarcks1/)
