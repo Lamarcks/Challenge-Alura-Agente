@@ -26,6 +26,8 @@ Projeto desenvolvido para o desafio final da **Alura + Oracle Next Education (ON
 
 <img width="1919" height="1079" alt="Captura de tela 2026-08-13 080920" src="https://github.com/user-attachments/assets/4316accc-0f97-4213-9602-04c5243ec032" />
 
+> 💡 Clique na imagem acima para acessar e testar a aplicação diretamente pelo navegador.
+
 </div>
 
 ---
